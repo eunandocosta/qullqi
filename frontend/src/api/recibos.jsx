@@ -1,4 +1,4 @@
-const API_URL = "http://recibo:8000";
+const API_URL = "https://qullqi-l52k.onrender.com";
 
 export async function listarRecibos() {
   const res = await fetch(`${API_URL}/recibos`);
