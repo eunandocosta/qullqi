@@ -1,0 +1,25 @@
+version: "3.9"
+
+services:
+  recibo:
+    container_name: gestor-api
+    build:
+      context: ./recibo
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./recibo/uploads:/app/uploads
+      - ./recibo/recibos.db:/app/recibos.db
+    restart: unless-stopped
+
+  frontend:
+    container_name: gestor-frontend
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:80"
+    restart: unless-stopped
+    depends_on:
+      - recibo

@@ -1,0 +1,13 @@
+# Python (backend)
+recibo/venv/
+recibo/__pycache__/
+recibo/recibos.db
+recibo/uploads/
+
+# Node (frontend)
+frontend/node_modules/
+frontend/dist/
+
+# Geral
+*.log
+.env
