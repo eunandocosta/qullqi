@@ -1,57 +1,58 @@
-import { useState } from "react";
-import { criarReciboComArquivo } from "../api/recibos";
+// src/components/FormularioRecibo.jsx
+import {
+  Box,
+  Button,
+  TextField,
+  Stack,
+  Paper,
+} from '@mui/material';
+import { useState } from 'react';
 
 export default function FormularioRecibo() {
-  const [titulo, setTitulo] = useState("");
-  const [descricao, setDescricao] = useState("");
-  const [valor, setValor] = useState("");
-  const [arquivo, setArquivo] = useState(null);
+  const [cliente, setCliente] = useState('');
+  const [valor, setValor] = useState('');
+  const [descricao, setDescricao] = useState('');
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    try {
-      const resposta = await criarReciboComArquivo(
-        { titulo, descricao, valor },
-        arquivo
-      );
-      alert(`Recibo criado com sucesso!\nCódigo: ${resposta.codigo_unico}`);
-      setTitulo("");
-      setDescricao("");
-      setValor("");
-      setArquivo(null);
-    } catch (error) {
-      alert("Erro ao enviar recibo.");
-    }
+    console.log({ cliente, valor, descricao });
+
+    // Resetar os campos após envio
+    setCliente('');
+    setValor('');
+    setDescricao('');
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h2>Enviar Recibo</h2>
-      <input
-        type="text"
-        placeholder="Título"
-        value={titulo}
-        onChange={(e) => setTitulo(e.target.value)}
-        required
-      />
-      <textarea
-        placeholder="Descrição"
-        value={descricao}
-        onChange={(e) => setDescricao(e.target.value)}
-      />
-      <input
-        type="number"
-        placeholder="Valor"
-        value={valor}
-        onChange={(e) => setValor(e.target.value)}
-        required
-      />
-      <input
-        type="file"
-        onChange={(e) => setArquivo(e.target.files[0])}
-        required
-      />
-      <button type="submit">Enviar</button>
-    </form>
+    <Paper elevation={3} sx={{ p: 4 }}>
+      <Box component="form" onSubmit={handleSubmit}>
+        <Stack spacing={3}>
+          <TextField
+            label="Nome do Cliente"
+            variant="outlined"
+            required
+            value={cliente}
+            onChange={(e) => setCliente(e.target.value)}
+          />
+          <TextField
+            label="Valor (R$)"
+            variant="outlined"
+            type="number"
+            required
+            value={valor}
+            onChange={(e) => setValor(e.target.value)}
+          />
+          <TextField
+            label="Descrição"
+            variant="outlined"
+            value={descricao}
+            onChange={(e) => setDescricao(e.target.value)}
+          />
+          <Button variant="contained" color="primary" type="submit">
+            Cadastrar Recibo
+          </Button>
+        </Stack>
+      </Box>
+    </Paper>
   );
 }

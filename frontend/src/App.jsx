@@ -1,14 +1,15 @@
-import './App.css'
-import FormularioRecibo from "./components/FormularioRecibo";
+import { Container, Typography, Box, Button } from '@mui/material';
+import FormularioRecibo from './components/FormularioRecibo';
 
-function App() {
+export default function App() {
   return (
-    <div style={{ padding: "2rem" }}>
-      <h1>Gestor de Recibos</h1>
-      <FormularioRecibo />
-    </div>
+    <Container maxWidth="sm">
+      <Box sx={{ my: 4 }}>
+        <Typography variant="h4" component="h1" gutterBottom>
+          Gestor de Recibos
+        </Typography>
+        <FormularioRecibo/>
+      </Box>
+    </Container>
   );
 }
-
-
-export default App
