@@ -1,5 +1,5 @@
 import { Container, Typography, Box, Button } from '@mui/material';
-import FormularioRecibo from './components/FormularioRecibo';
+import Home from './components/Home';
 
 export default function App() {
   return (
@@ -8,7 +8,7 @@ export default function App() {
         <Typography variant="h4" component="h1" gutterBottom>
           Gestor de Recibos
         </Typography>
-        <FormularioRecibo/>
+        <Home/>
       </Box>
     </Container>
   );
