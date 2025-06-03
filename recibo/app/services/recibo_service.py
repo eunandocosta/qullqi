@@ -4,6 +4,7 @@ from app.models.recibo import Recibo
 from app.database.connection import SessionLocal
 from datetime import datetime,  timezone
 import uuid
+from sqlalchemy.orm import Session
 
 UPLOAD_DIR = "uploads"
 
@@ -31,6 +32,9 @@ def salvar_recibo_com_arquivo(titulo, descricao, valor, arquivo: UploadFile):
         caminho_arquivo=caminho_arquivo,
         data_envio=datetime.now(timezone.utc)
     )
+
+def listar_recibos(db: Session):
+    return db.query(Recibo).all()
 
     db.add(recibo)
     db.commit()

@@ -1,8 +1,10 @@
-from fastapi import APIRouter, UploadFile, File, Form, Query
+from fastapi import APIRouter, UploadFile, File, Form, Query, Depends
 from app.services.recibo_service import salvar_recibo_com_arquivo
 from app.schemas.recibo import ReciboOut
 from sqlalchemy import and_
 from datetime import datetime
+from sqlalchemy.orm import Session
+from app.database.connection import get_db
 
 router = APIRouter(prefix="/recibos", tags=["Recibos"])
 
@@ -125,3 +127,9 @@ def baixar_relatorio(
         raise HTTPException(status_code=400, detail="Formato inválido. Use csv, excel ou pdf.")
 
     return FileResponse(path, filename=path)
+
+@router.get("/recibos")
+def get_recibos(db: Session = Depends(get_db)):
+    return listar_recibos(db)
+
+recibo_router = router
